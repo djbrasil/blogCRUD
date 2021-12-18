@@ -1,0 +1,37 @@
+{% load bootstrap5 %}
+{% load static %}
+<html> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Django Post Edit Test</title> 
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+
+<body>
+    <div class="page-header">
+        {% if user.is_anonymous %}
+        <a class="top-menu btn btn-warning" href="{% url 'login' %}">Login</a> 
+        {% else %} 
+        <a class="top-menu btn btn-danger" href="{% url 'logout' %}">Logout</a>
+        <a class="top-menu btn btn">{{ user.first_name }}</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'post_new' %}" class="top-menu btn btn-warning">+ Novo Post</a>
+        {% endif %}
+        <h1><a href="/">Django Post Edit Test</a></h1>
+    </div> 
+    {% bootstrap_messages %}
+    <div class="container-sm p-5"> 
+        <center>
+            {% block content %}
+
+            {% endblock %}
+        </center>
+    </div>
+</body>
+
+</html>
